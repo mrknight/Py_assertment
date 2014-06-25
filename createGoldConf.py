@@ -4,61 +4,32 @@
     create the gold config for gold_auto
 """
 
-import  os.path
-import  ioPDBbind, ioMisc
+import os.path
+import ioPDBbind, ioMisc
+# import constant
+from constConf import *
 
 SOURCE_CONF     = '/home/dat/WORK/scripts/gold.conf'
-PROTEIN_DIR     = '/home/dat/WORK/DB/'
-
-PROTEIN_LIST    = ['/home/dat/WORK/output/PDBbind_test12.txt',
-                   '',
-                   '',
-                   '',
-                   '',
-                   '/home/dat/WORK/output/PDBbind_test07.txt']
-
-lPROTEIN_DB_VER  = ['v2012', 'v2011', 'v2010', 'v2009', 'v2008', 'v2007']
-
-
-OUTPUT_DIR      = '/home/dat/WORK/output/'
-
-lSCORE          = ['asp', 'plp', 'chemscore', 'goldscore']
-
-lPROTEIN_STATUS  = ['unprepared', 'prepared']
-
-lPROTEIN_DB      = ['PDBbind', '']
-
-
-lPROTEIN_SUFFIX   = ['_protein.pdb', '_protein_proton.pdb',]
-
-LIGAND_SUFFIX    = '_ligand.mol2'  
-
 
 #################################################################
-i = 5
+i = 0
 
 proteinList = ioPDBbind.readProteinInfo(ioPDBbind.PATHDB+ioPDBbind.dataFileCore[i],ioPDBbind.PATHDB+ioPDBbind.nameFileCore[i])
 
+# TODO: replace with parse_index
 proteinDict = ioPDBbind.convertList2Dict(proteinList)
-
-# compare the protein list from PDBbind with the used true protein list, to ensure to have the same list
-proteinDict_manual = ioMisc.readDictFile(PROTEIN_LIST[i]) 
-
-if (len(proteinDict_manual.keys()) != len(proteinDict.keys())):    
-    proteinDict = proteinDict_manual
 
 proteinDir  = os.path.join(PROTEIN_DIR, lPROTEIN_DB[0], lPROTEIN_DB_VER[i])
 
 proteinStatus = 0 # unprepared
 #proteinStatus = 1 # prepared
 
-
 def createGoldConf(proteinStatus, proteinDB, DBver, proteinID, score):
 #   read the exemplary config and create the new config from given param
     outputConf  = 'gold_' + proteinID + '_' + score + '.conf'
     path = os.path.join(OUTPUT_DIR, 'conf', lPROTEIN_STATUS[proteinStatus], proteinDB, DBver, 'gold', score)
     outputConf  = os.path.join(path, outputConf)
-    print outputConf
+    print(outputConf)
     if not os.path.exists(path): # try to create the dir path first
         os.makedirs(path) 
     OUTFILE = open(outputConf, 'w')
@@ -69,7 +40,7 @@ def createGoldConf(proteinStatus, proteinDB, DBver, proteinID, score):
     
     # open conf file 
     if not os.path.exists(SOURCE_CONF):
-        print "File not found ", SOURCE_CONF   
+        print("File not found ", SOURCE_CONF)
         quit()
     
     # open file for reading and writing 
@@ -106,7 +77,6 @@ def createGoldConf(proteinStatus, proteinDB, DBver, proteinID, score):
     INFILE.close()
     OUTFILE.close()
 
-
 for aScore in lSCORE:
     for entry in proteinDict.keys():
         if os.path.isdir(os.path.join(proteinDir, entry)):
@@ -117,9 +87,9 @@ for aScore in lSCORE:
                 #createGoldConf(lPROTEIN_STATUS[0], lPROTEIN_DB[0], lPROTEIN_DB_VER[0], entry, lSCORE[0])
                 createGoldConf(proteinStatus, lPROTEIN_DB[0], lPROTEIN_DB_VER[i], entry, aScore)
             else:
-                print "File not found ", proteinFile, ' or ', ligandFile, ' in ', os.path.join(proteinDir, entry)
+                print("File not found ", proteinFile, ' or ', ligandFile, ' in ', os.path.join(proteinDir, entry))
                 quit()
         else:
-            print os.path.join(proteinDir, entry) + " is not exist\n"
-    print 'Finish creating gold_run for '+ aScore + lPROTEIN_STATUS[proteinStatus]
+            print(os.path.join(proteinDir, entry) + " is not exist\n")
+    print('Finish creating gold_run for '+ aScore + lPROTEIN_STATUS[proteinStatus])
 

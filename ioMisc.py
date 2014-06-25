@@ -58,5 +58,3 @@ def readCSAR_KiFile(path):
         #print index, PDBname, pKd         
     INFILE.close()
     return (PDBname, pKd)
-    
-    

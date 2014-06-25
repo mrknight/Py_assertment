@@ -12,18 +12,13 @@ import collections
 # some constant
 PATHDB          = '/home/dat/WORK/DB/PDBbind/'
 
-#PATHDB          = '/mnt/DATABASES/BENCHMARK/'
-
 CLUSTERFILE     = 'v2012/INDEX_core_cluster.2012'
 
-PDBbindYear     = collections.namedtuple('Year', 'y2012 y2011 y2010 y2009 y2008 y2007')
+PDBbindYear     = collections.namedtuple('Year', 'y2013 y2012 y2007')
 
-dataFileCore    = PDBbindYear(y2012='v2012/INDEX_core_data.2012',
-                              y2011='v2011/INDEX_core_data.2011',
-                              y2010='v2010/INDEX.core.data.2010',
-                              y2009='v2009/INDEX.core.data.2009',
-                              y2008='v2008/INDEX.core.data.2008',
-                              y2007='v2007/INDEX.2007.core.data_fix') 
+dataFileCore    = PDBbindYear(y2013='v2013/INDEX_core_data.2013',
+                              y2012='v2012/INDEX_core_data.2012',
+                              y2007='v2007/INDEX.2007.core.data_fix')
 
 #dataFileCore    = PDBbindYear(y2012='v2012/INDEX_core_data.2012',
 #                              y2011='v2011/INDEX_core_data.2011',
@@ -39,11 +34,8 @@ dataFileCore    = PDBbindYear(y2012='v2012/INDEX_core_data.2012',
 #                       'v2008/INDEX.core.data.2008',
 #                       'v2007/INDEX.2007.core.data')
 
-nameFileCore    = PDBbindYear(y2012='v2012/INDEX_core_name.2012',
-                              y2011='v2011/INDEX_core_name.2011',
-                              y2010='v2010/INDEX.core.name.2010',
-                              y2009='v2009/INDEX.core.name.2009',
-                              y2008='v2008/INDEX.core.name.2008',
+nameFileCore    = PDBbindYear(y2013='v2013/INDEX_core_data.2013',
+                              y2012='v2012/INDEX_core_name.2012',
                               y2007='v2007/INDEX.2007.core.name_fix')
 #nameFileCore    = (    'v2012/INDEX_core_name.2012',
 #                       'v2011/INDEX_core_name.2011',
@@ -52,11 +44,8 @@ nameFileCore    = PDBbindYear(y2012='v2012/INDEX_core_name.2012',
 #                       'v2008/INDEX.core.name.2008',
 #                       'v2007/INDEX.2007.core.name')
 
-dataFileRefined = PDBbindYear(y2012='v2012/INDEX_refined_data.2012',
-                              y2011='v2011/INDEX_refined_data.2011',
-                              y2010='v2010/INDEX.refined.data.2010',
-                              y2009='v2009/INDEX.refined.data.2009',
-                              y2008='v2008/INDEX.refined.data.2008',
+dataFileRefined = PDBbindYear(y2013='v2013/INDEX_refined_data.2013',
+                              y2012='v2012/INDEX_refined_data.2012',
                               y2007='v2007/INDEX.2007.refined.data')
 
 #dataFileRefined    = (    'v2012/INDEX_refined_data.2012',
@@ -66,11 +55,8 @@ dataFileRefined = PDBbindYear(y2012='v2012/INDEX_refined_data.2012',
 #                          'v2008/INDEX.refined.data.2008',
 #                          'v2007/INDEX.2007.refined.data')
 
-nameFileRefined = PDBbindYear(y2012='v2012/INDEX_refined_name.2012',
-                              y2011='v2011/INDEX_refined_name.2011',
-                              y2010='v2010/INDEX.refined.name.2010',
-                              y2009='v2009/INDEX.refined.name.2009',
-                              y2008='v2008/INDEX.refined.name.2008',
+nameFileRefined = PDBbindYear(y2013='v2013/INDEX_refined_name.2013',
+                              y2012='v2012/INDEX_refined_name.2012',
                               y2007='v2007/INDEX.2007.refined.name')
 
 #nameFileRefined    = (    'v2012/INDEX_refined_name.2012',
@@ -85,7 +71,7 @@ def readNameFile(nameFile):
 # read ECnumber and protein name from name list file
 # return a dict of tuples with key = protein id and 1.index = EC number, 2.index = protein name
     if not os.path.exists(nameFile):
-        print "File not found ", nameFile   
+        print("File not found ", nameFile)
         quit()
     
     FILE = open(nameFile, 'r')
@@ -110,7 +96,7 @@ def readNameFile(nameFile):
 def readClusterFile(clusterFile):
 # read cluster info (since PDBbind ver 2012)
     if not os.path.exists(clusterFile):
-        print "File not found ", clusterFile   
+        print("File not found ", clusterFile)
         quit()   
     
     FILE = open(clusterFile, 'r')
@@ -128,7 +114,7 @@ def readClusterFile(clusterFile):
 def readProteinInfo(dataFile, nameFile):
 # read the whole protein information from PDBbind list file 
     if not os.path.exists(dataFile):
-        print "File not found ", dataFile   
+        print("File not found ", dataFile)
         quit()
     
     FILE = open(dataFile, 'r')
@@ -196,3 +182,34 @@ def createClusterDict(proteinList):
     clusterDict.pop('', None)
     return clusterDict
 
+def parse_index(path, index):
+    '''
+    parse PDBbind index file, path is the PDBbind directory
+    '''
+    regexp = r"""^
+                (?P<pdb>\w{4})\s+
+                (?P<resolution>\d[.]\d{2}|NMR)\s+
+                (?P<year>\d{4})\s+
+                (?P<pKx>\d{1,2}[.]\d{2})\s+
+                (?P<type>\w{2,4})
+                (?P<relation>[<>=~]{1,2})
+                (?P<value>\d+[.]\d+|\d+)
+                (?P<unit>\w{2}).+"""
+
+    pattern = re.compile(regexp, re.VERBOSE)
+
+    data = {}
+    for line in open(index):
+        if not line.startswith('#'):
+            match = pattern.match(line)
+
+            # PRINT A WARNING IF REGULAR EXPRESSION FAILED ON A LINE
+            if not match:
+                logger.warn("Could not parse line: {0}".format(line))
+                continue
+
+            rowdata = match.groupdict()
+            pdb = rowdata.pop('pdb')
+            data[pdb] = rowdata
+
+    return data

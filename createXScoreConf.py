@@ -6,46 +6,27 @@
 
 import os.path
 import ioMisc, ioPDBbind
+# import constant
+from constConf import *
 
 SOURCE_CONF     = '/home/dat/WORK/scripts/xscore.conf'
-PROTEIN_DIR     = '/home/dat/WORK/DB/'
-
-PROTEIN_LIST    = ['/home/dat/WORK/output/PDBbind_test12.txt',
-                   '',
-                   '',
-                   '',
-                   '',
-                   '/home/dat/WORK/output/PDBbind_test07.txt']
-
-lPROTEIN_DB_VER  = ['v2012', 'v2011', 'v2010', 'v2009', 'v2008', 'v2007']
-
-OUTPUT_DIR      = '/home/dat/WORK/output/'
-
-#lSCORE          = ['HPScore', 'HMScore', 'HSScore']
-
-lPROTEIN_STATUS  = ['unprepared', 'prepared']
-
-lPROTEIN_DB      = ['PDBbind', '']
-
-lPROTEIN_SUFFIX   = ['_protein.pdb', '_protein_proton.pdb',]
-LIGAND_SUFFIX    = '_ligand.mol2'  
 
 #################################################################
-i = 5
-proteinList = ioPDBbind.readProteinInfo(ioPDBbind.PATHDB+ioPDBbind.dataFileCore[i],ioPDBbind.PATHDB+ioPDBbind.nameFileCore[i])
+i = 0
 
+proteinList = ioPDBbind.readProteinInfo(ioPDBbind.PATHDB+ioPDBbind.dataFileCore[i],ioPDBbind.PATHDB+ioPDBbind.nameFileCore[i])
+# TODO: replace with parse_index
 proteinDict = ioPDBbind.convertList2Dict(proteinList)
 
-# compare the protein list from PDBbind with the used true protein list, to ensure to have the same list
-proteinDict_manual = ioMisc.readDictFile(PROTEIN_LIST[i]) 
-
-if (len(proteinDict_manual.keys()) != len(proteinDict.keys())):    
-    proteinDict = proteinDict_manual
+# DEPRECATED: compare the protein list from PDBbind with the used true protein list, to ensure to have the same list
+#proteinDict_manual = ioMisc.readDictFile(PROTEIN_INDEXFILE[i])
+#if (len(proteinDict_manual.keys()) != len(proteinDict.keys())):
+#    proteinDict = proteinDict_manual
 
 proteinDir  = os.path.join(PROTEIN_DIR, lPROTEIN_DB[0], lPROTEIN_DB_VER[i])
 
-#proteinStatus = 0 # unprepared
-proteinStatus = 1 # prepared
+proteinStatus = 0 # unprepared
+#proteinStatus = 1 # prepared
 
 def createXScoreConf(proteinStatus, proteinDB, DBver, proteinID):
 #   read the exemplary config and create the new config from given param
@@ -63,7 +44,7 @@ def createXScoreConf(proteinStatus, proteinDB, DBver, proteinID):
     
     # open conf file 
     if not os.path.exists(SOURCE_CONF):
-        print "File not found ", SOURCE_CONF   
+        print("File not found ", SOURCE_CONF)
         quit()
     
     # open file for reading and writing 
@@ -101,8 +82,8 @@ for entry in proteinDict.keys():
             #createGoldConf(lPROTEIN_STATUS[0], lPROTEIN_DB[0], lPROTEIN_DB_VER[0], entry, lSCORE[0])
             createXScoreConf(proteinStatus, lPROTEIN_DB[0], lPROTEIN_DB_VER[i], entry)
         else:
-            print "File not found ", proteinFile, ' or ', ligandFile, ' in ', os.path.join(proteinDir, entry)
+            print("File not found ", proteinFile, ' or ', ligandFile, ' in ', os.path.join(proteinDir, entry))
             quit()
 
-print 'Finish creating xscore run.'
+print('Finish creating xscore run.')
 
