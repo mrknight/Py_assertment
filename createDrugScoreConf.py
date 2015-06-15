@@ -4,7 +4,7 @@
     create the xscore conf for input file
 """
 
-#/prog/drugscore/2011/dsx_linux_64.lnx -P /home/dat/WORK/DB/PDBbind/v2012/1px4/1px4_protein.pdb -L /home/dat/WORK/DB/PDBbind/v2012/1px4/1px4_ligand.mol2 -D /prog/drugscore/2011/pdb_pot_0511/
+#/prog/scoring/drugscore/2011/dsx_linux_64.lnx -P /home/dat/WORK/DB/PDBbind/v2012/1px4/1px4_protein.pdb -L /home/dat/WORK/DB/PDBbind/v2012/1px4/1px4_ligand.mol2 -D /prog/scoring/drugscore/2011/pdb_pot_0511/
 
 import os.path
 import ioPDBbind, ioMisc

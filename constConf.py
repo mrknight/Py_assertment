@@ -2,11 +2,12 @@ __author__ = 'dat'
 
 PROTEIN_DIR = '/home/dat/WORK/DB/'
 
-PROTEIN_INDEXFILE = ['/home/dat/WORK/DB/PDBbind/v2013-core/INDEX_core_data.2013',
+PROTEIN_INDEXFILE = ['/home/dat/WORK/DB/PDBbind/v2014-core/INDEX_core_data.2013',
+                     '/home/dat/WORK/DB/PDBbind/v2013-core/INDEX_core_data.2013',
                      '/home/dat/WORK/output/PDBbind_test12.txt',
                      '/home/dat/WORK/output/PDBbind_test07.txt']
 
-lPROTEIN_DB_VER = ['v2013', 'v2012', 'v2007']
+lPROTEIN_DB_VER = ['v2014-refined', 'v2013-refined', 'v2012', 'v2007']
 
 OUTPUT_DIR = '/home/dat/WORK/output/'
 

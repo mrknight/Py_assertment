@@ -9,17 +9,19 @@ import ioPDBbind, ioMisc
 # import constant
 from constConf import *
 
-SOURCE_CONF     = '/home/dat/WORK/scripts/gold.conf'
+                SOURCE_CONF     = '/home/dat/WORK/docking_config/gold.conf'
 
 #################################################################
 i = 0
 
 proteinList = ioPDBbind.readProteinInfo(ioPDBbind.PATHDB+ioPDBbind.dataFileCore[i],ioPDBbind.PATHDB+ioPDBbind.nameFileCore[i])
 
+
 # TODO: replace with parse_index
 proteinDict = ioPDBbind.convertList2Dict(proteinList)
 
 proteinDir  = os.path.join(PROTEIN_DIR, lPROTEIN_DB[0], lPROTEIN_DB_VER[i])
+
 
 proteinStatus = 0 # unprepared
 #proteinStatus = 1 # prepared
@@ -77,19 +79,22 @@ def createGoldConf(proteinStatus, proteinDB, DBver, proteinID, score):
     INFILE.close()
     OUTFILE.close()
 
-for aScore in lSCORE:
-    for entry in proteinDict.keys():
-        if os.path.isdir(os.path.join(proteinDir, entry)):
-            proteinFile = entry + lPROTEIN_SUFFIX[proteinStatus]
-            ligandFile  = entry + LIGAND_SUFFIX
-            if os.path.exists(os.path.join(proteinDir, entry, proteinFile)) and  os.path.exists(os.path.join(proteinDir, entry, ligandFile)):
-                # only create config file if the ligand and the protein exist
-                #createGoldConf(lPROTEIN_STATUS[0], lPROTEIN_DB[0], lPROTEIN_DB_VER[0], entry, lSCORE[0])
-                createGoldConf(proteinStatus, lPROTEIN_DB[0], lPROTEIN_DB_VER[i], entry, aScore)
-            else:
-                print("File not found ", proteinFile, ' or ', ligandFile, ' in ', os.path.join(proteinDir, entry))
-                quit()
-        else:
-            print(os.path.join(proteinDir, entry) + " is not exist\n")
-    print('Finish creating gold_run for '+ aScore + lPROTEIN_STATUS[proteinStatus])
 
+def main():
+    for aScore in lSCORE:
+        for entry in proteinDict.keys():
+            if os.path.isdir(os.path.join(proteinDir, entry)):
+                proteinFile = entry + lPROTEIN_SUFFIX[proteinStatus]
+                ligandFile  = entry + LIGAND_SUFFIX
+                if os.path.exists(os.path.join(proteinDir, entry, proteinFile)) and  os.path.exists(os.path.join(proteinDir, entry, ligandFile)):
+                    # only create config file if the ligand and the protein exist
+                    #createGoldConf(lPROTEIN_STATUS[0], lPROTEIN_DB[0], lPROTEIN_DB_VER[0], entry, lSCORE[0])
+                    createGoldConf(proteinStatus, lPROTEIN_DB[0], lPROTEIN_DB_VER[i], entry, aScore)
+                else:
+                    print("File not found ", proteinFile, ' or ', ligandFile, ' in ', os.path.join(proteinDir, entry))
+                    quit()
+            else:
+                print(os.path.join(proteinDir, entry) + " is not exist\n")
+        print('Finish creating gold_run for '+ aScore + lPROTEIN_STATUS[proteinStatus])
+
+main()

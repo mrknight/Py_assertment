@@ -12,11 +12,13 @@ from constConf import *
 SOURCE_CONF     = '/home/dat/WORK/scripts/xscore.conf'
 
 #################################################################
-i = 0
+i = 1
 
-proteinList = ioPDBbind.readProteinInfo(ioPDBbind.PATHDB+ioPDBbind.dataFileCore[i],ioPDBbind.PATHDB+ioPDBbind.nameFileCore[i])
+#proteinList = ioPDBbind.readProteinInfo(ioPDBbind.PATHDB+ioPDBbind.dataFileCore[i],ioPDBbind.PATHDB+ioPDBbind.nameFileCore[i])
+proteinList = ioPDBbind.readProteinInfo(ioPDBbind.PATHDB+ioPDBbind.dataFileRefined[i],ioPDBbind.PATHDB+ioPDBbind.nameFileRefined[i])
 # TODO: replace with parse_index
 proteinDict = ioPDBbind.convertList2Dict(proteinList)
+
 
 # DEPRECATED: compare the protein list from PDBbind with the used true protein list, to ensure to have the same list
 #proteinDict_manual = ioMisc.readDictFile(PROTEIN_INDEXFILE[i])
@@ -24,6 +26,9 @@ proteinDict = ioPDBbind.convertList2Dict(proteinList)
 #    proteinDict = proteinDict_manual
 
 proteinDir  = os.path.join(PROTEIN_DIR, lPROTEIN_DB[0], lPROTEIN_DB_VER[i])
+
+print(proteinDir)
+print(proteinDict)
 
 proteinStatus = 0 # unprepared
 #proteinStatus = 1 # prepared
@@ -74,6 +79,7 @@ def createXScoreConf(proteinStatus, proteinDB, DBver, proteinID):
 
 
 for entry in proteinDict.keys():
+    print(entry)
     if os.path.isdir(os.path.join(proteinDir, entry)):
         proteinFile = entry + lPROTEIN_SUFFIX[proteinStatus]
         ligandFile  = entry + LIGAND_SUFFIX

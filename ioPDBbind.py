@@ -14,9 +14,10 @@ PATHDB          = '/home/dat/WORK/DB/PDBbind/'
 
 CLUSTERFILE     = 'v2012/INDEX_core_cluster.2012'
 
-PDBbindYear     = collections.namedtuple('Year', 'y2013 y2012 y2007')
+PDBbindYear     = collections.namedtuple('Year', 'y2014 y2013 y2012 y2007')
 
-dataFileCore    = PDBbindYear(y2013='v2013/INDEX_core_data.2013',
+dataFileCore    = PDBbindYear(y2014='v2014-core/INDEX_core_data.2013',
+                              y2013='v2013-core/INDEX_core_data.2013',
                               y2012='v2012/INDEX_core_data.2012',
                               y2007='v2007/INDEX.2007.core.data_fix')
 
@@ -34,17 +35,19 @@ dataFileCore    = PDBbindYear(y2013='v2013/INDEX_core_data.2013',
 #                       'v2008/INDEX.core.data.2008',
 #                       'v2007/INDEX.2007.core.data')
 
-nameFileCore    = PDBbindYear(y2013='v2013/INDEX_core_data.2013',
+nameFileCore    = PDBbindYear(y2014='v2014-core/INDEX_core_data.2013',
+                              y2013='v2013-core/INDEX_core_data.2013',
                               y2012='v2012/INDEX_core_name.2012',
                               y2007='v2007/INDEX.2007.core.name_fix')
 #nameFileCore    = (    'v2012/INDEX_core_name.2012',
-#                       'v2011/INDEX_core_name.2011',
+#                       'v2011/INDEX_core_name.2011'
 #                       'v2010/INDEX.core.name.2010',
 #                       'v2009/INDEX.core.name.2009',
 #                       'v2008/INDEX.core.name.2008',
 #                       'v2007/INDEX.2007.core.name')
 
-dataFileRefined = PDBbindYear(y2013='v2013/INDEX_refined_data.2013',
+dataFileRefined = PDBbindYear(y2014='v2014-refined/INDEX_refined_data.2014',
+                              y2013='v2013-refined/INDEX_refined_data.2013',
                               y2012='v2012/INDEX_refined_data.2012',
                               y2007='v2007/INDEX.2007.refined.data')
 
@@ -55,7 +58,8 @@ dataFileRefined = PDBbindYear(y2013='v2013/INDEX_refined_data.2013',
 #                          'v2008/INDEX.refined.data.2008',
 #                          'v2007/INDEX.2007.refined.data')
 
-nameFileRefined = PDBbindYear(y2013='v2013/INDEX_refined_name.2013',
+nameFileRefined = PDBbindYear(y2014='v2014-refined/INDEX_refined_name.2014',
+                              y2013='v2013-refined/INDEX_refined_name.2013',
                               y2012='v2012/INDEX_refined_name.2012',
                               y2007='v2007/INDEX.2007.refined.name')
 
