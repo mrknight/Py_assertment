@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9f375b0c-504b-41ad-b3e7-bdfe2cbd80de" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/.name" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/assertment.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/createGoldPose.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/constConf.py" afterPath="$PROJECT_DIR$/constConf.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/createDrugScoreConf.py" afterPath="$PROJECT_DIR$/createDrugScoreConf.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/createGoldConf.py" afterPath="$PROJECT_DIR$/createGoldConf.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/createXScoreConf.py" afterPath="$PROJECT_DIR$/createXScoreConf.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ioPDBbind.py" afterPath="$PROJECT_DIR$/ioPDBbind.py" />
     </list>
@@ -29,7 +18,7 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/assertment$createXScoreConf.coverage" NAME="createXScoreConf Coverage Results" MODIFIED="1434379050465" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/assertment$createXScoreConf.coverage" NAME="createXScoreConf Coverage Results" MODIFIED="1434383778696" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/assertment$createDrugScoreConf.coverage" NAME="createDrugScoreConf Coverage Results" MODIFIED="1403617986831" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/assertment$createGoldConf.coverage" NAME="createGoldConf Coverage Results" MODIFIED="1434374392745" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
@@ -46,17 +35,17 @@
         <entry file="file://$PROJECT_DIR$/constConf.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="9" column="50" selection-start-line="9" selection-start-column="50" selection-end-line="9" selection-end-column="50" />
+              <caret line="9" column="67" selection-start-line="9" selection-start-column="67" selection-end-line="9" selection-end-column="67" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ioPDBbind.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ioPDBbind.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ioPDBbind.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.08427877">
-              <caret line="19" column="47" selection-start-line="19" selection-start-column="47" selection-end-line="19" selection-end-column="47" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="37" column="43" selection-start-line="37" selection-start-column="42" selection-end-line="37" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -66,16 +55,16 @@
         <entry file="file://$PROJECT_DIR$/createXScoreConf.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="24" column="35" selection-start-line="24" selection-start-column="35" selection-end-line="24" selection-end-column="35" />
+              <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="createGoldConf.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="createGoldConf.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/createGoldConf.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
+            <state vertical-scroll-proportion="0.27552673">
               <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
               <folding>
                 <element signature="e#69#83#0" expanded="true" />
@@ -121,9 +110,9 @@
       <list>
         <option value="$PROJECT_DIR$/createGoldPose.py" />
         <option value="$PROJECT_DIR$/createGoldConf.py" />
+        <option value="$PROJECT_DIR$/constConf.py" />
         <option value="$PROJECT_DIR$/createXScoreConf.py" />
         <option value="$PROJECT_DIR$/ioPDBbind.py" />
-        <option value="$PROJECT_DIR$/constConf.py" />
       </list>
     </option>
   </component>
@@ -951,20 +940,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/createGoldConf.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding>
-            <element signature="e#69#83#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/constConf.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="50" selection-start-line="9" selection-start-column="50" selection-end-line="9" selection-end-column="50" />
+          <caret line="9" column="67" selection-start-line="9" selection-start-column="67" selection-end-line="9" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ioPDBbind.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="37" column="43" selection-start-line="37" selection-start-column="42" selection-end-line="37" selection-end-column="43" />
           <folding />
         </state>
       </provider>
@@ -972,16 +959,18 @@
     <entry file="file://$PROJECT_DIR$/createXScoreConf.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="35" selection-start-line="24" selection-start-column="35" selection-end-line="24" selection-end-column="35" />
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ioPDBbind.py">
+    <entry file="file://$PROJECT_DIR$/createGoldConf.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.08427877">
-          <caret line="19" column="47" selection-start-line="19" selection-start-column="47" selection-end-line="19" selection-end-column="47" />
-          <folding />
+        <state vertical-scroll-proportion="0.27552673">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding>
+            <element signature="e#69#83#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -12,7 +12,7 @@ from constConf import *
 SOURCE_CONF     = '/home/dat/WORK/scripts/xscore.conf'
 
 #################################################################
-i = 1
+i = 2
 
 #proteinList = ioPDBbind.readProteinInfo(ioPDBbind.PATHDB+ioPDBbind.dataFileCore[i],ioPDBbind.PATHDB+ioPDBbind.nameFileCore[i])
 proteinList = ioPDBbind.readProteinInfo(ioPDBbind.PATHDB+ioPDBbind.dataFileRefined[i],ioPDBbind.PATHDB+ioPDBbind.nameFileRefined[i])
