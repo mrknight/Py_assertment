@@ -1,8 +1,10 @@
 
 import os
 import csv
+import ioPDBbind
+from constConf import *
 
-XSCORE_HEADER = ["MW", "LogP", "VDW", "HB", "HP", "HM", "HS", "RT"]
+XSCORE_HEADER = ["ID", "MW", "LogP", "VDW", "HB", "HP", "HM", "HS", "RT"]
 SOURCE_CONF   = '/home/dat/WORK/scripts/xscore.conf'
 
 
@@ -28,15 +30,16 @@ def writeXScoreDesc(path, ligandList, output):
     CSV.writerow(XSCORE_HEADER)
 
     for ligandID in ligandList:
-        desc = readFromTable(path, ligandID) + readFromLog(path, ligandID)
+        desc = [ligandID] + readFromTable(path, ligandID) + readFromLog(path, ligandID)
         CSV.writerow(desc)
+    FILE.close()
 
-    CSV.close()
-
-def createXScoreConf(path2Protein, path2Ligand, proteinID, ligandID, outputDir):
+# create xscore config file for a protein and a ligand, output config file will be written to outputDir
+def createXScoreConf(path2Protein, proteinID, path2Ligand, ligandID, outputDir, outputConfDir):
 #   read the exemplary config and create the new config from given param
     outputConf  = 'xscore_' + ligandID + '.conf'
-    OUTFILE = open(outputConf, 'w')
+    confPath = os.path.join(outputConfDir, outputConf)
+    OUTFILE = open(confPath, 'w')
 
     # open conf file
     if not os.path.exists(SOURCE_CONF):
@@ -45,32 +48,40 @@ def createXScoreConf(path2Protein, path2Ligand, proteinID, ligandID, outputDir):
 
     # open file for reading and writing
     INFILE  = open(SOURCE_CONF, 'r')
-
-    SHFILE  = open(os.path.join(OUTPUT_DIR, 'xscore_run_'+lPROTEIN_STATUS[proteinStatus]+'.sh'), 'a')
-
+    SHFILE  = open(os.path.join(OUTPUT_DIR, 'xscore_run_'+proteinID+'.sh'), 'a')
+    if (ligandID[-4:] != "mol2"):
+        ligandID = ligandID + ".mol2"
     for line in INFILE:
         if line.find('RECEPTOR_PDB_FILE ') > -1:
-            line = 'RECEPTOR_PDB_FILE ' + os.path.join(proteinDir, proteinID, proteinID + lPROTEIN_SUFFIX[proteinStatus] + '\n')
+            line = 'RECEPTOR_PDB_FILE ' + os.path.join(path2Protein, proteinID + '.pdb\n')
         elif line.find('REFERENCE_MOL2_FILE ') > -1:
-            line = 'REFERENCE_MOL2_FILE ' + os.path.join(proteinDir, proteinID, proteinID + LIGAND_SUFFIX+'\n')
+            line = 'REFERENCE_MOL2_FILE ' + os.path.join(path2Ligand, ligandID + '\n')
         elif line.find('LIGAND_MOL2_FILE ') > -1:
-            line = 'LIGAND_MOL2_FILE ' + os.path.join(proteinDir, proteinID, proteinID + LIGAND_SUFFIX+'\n')
+            line = 'LIGAND_MOL2_FILE ' + os.path.join(path2Ligand, ligandID + '\n')
         elif line.find('OUTPUT_TABLE_FILE ') > -1:
-            line = 'OUTPUT_TABLE_FILE ' + os.path.join(outputScore, proteinID+'.table\n')
+            line = 'OUTPUT_TABLE_FILE ' + os.path.join(outputDir, ligandID + '.table\n')
         elif line.find('OUTPUT_LOG_FILE ') > -1:
-            line = 'OUTPUT_LOG_FILE ' + os.path.join(outputScore, proteinID+'.log\n')
+            line = 'OUTPUT_LOG_FILE ' + os.path.join(outputDir, ligandID + '.log\n')
         OUTFILE.write(line)
 
     # write sh script
-    SHFILE.write('xscore ' + outputConf + '\n')
+    SHFILE.write('xscore ' + confPath + '\n')
 
     SHFILE.close()
     INFILE.close()
     OUTFILE.close()
 
+def createXScoreConfFromDir(path2Protein, proteinID, path2Ligand, outputDir, outputConfDir):
+    for ligandID in os.listdir(path2Ligand):
+        createXScoreConf(path2Protein, proteinID, path2Ligand, ligandID, outputDir, outputConfDir)
+
 def main():
-    path        = "/Users/knight/MyClouds/"
-    ligandID    = "10gs"
+    proteinList = ioPDBbind.readProteinInfo("/home/dat/WORK/DB/PDBbind/v2012-refined/INDEX_refined_data.2012", "/home/dat/WORK/DB/PDBbind/v2012-refined/INDEX_refined_name.2012")
+    proteinDict = ioPDBbind.convertList2Dict(proteinList)
+    createXScoreConfFromDir("/home/dat/WORK/DB/DUD-E/docked_by_Rognan/FGFR1/", "protein_prep",
+                     "/home/dat/WORK/DB/DUD-E/docked_by_Rognan/FGFR1/docked",
+                     "/home/dat/WORK/output/DUD-E/FGFR1/",
+                     "/home/dat/WORK/output/conf/DUD-E/FGFR1/")
 
 
 main()
