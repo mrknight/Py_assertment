@@ -100,7 +100,8 @@ def parseRMSDoutput(outputFile = TMP_FILE):
     line = FILE.readline() # read the next line
     return(line.split()[0])
 
-# return a list of RMSDs for all poses in poseDir, pose files are assumed to be in mol2 format
+# return a list of RMSDs for all poses in poseDir, pose files are assumed to start with prefix gold_soln
+# \TODO: change the prefix
 def calcRMSDPoses(refLigand, poseDir):
     RMSDs = {}
     for ligand in os.listdir(poseDir):
@@ -108,6 +109,16 @@ def calcRMSDPoses(refLigand, poseDir):
             rmsd = calcRMSD(refLigand, os.path.join(poseDir, ligand))
             RMSDs[ligand] = parseRMSDoutput()
     return (RMSDs)
+
+def writeRMSD2CSV(RMSDs, output):
+    FILE = open(output, 'w')
+    CSV = csv.writer(FILE, delimiter=',')
+    # write the csv header
+    CSV.writerow(["ID", "RMSDs"])
+
+    for ligandID in RMSDs.keys():
+        CSV.writerow(ligandID, RMSDs[ligandID])
+    FILE.close()
 
 def main():
     PDBbindSet = "v2012-refined"
