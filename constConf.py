@@ -2,6 +2,8 @@ __author__ = 'dat'
 
 PROTEIN_DIR = '/home/dat/WORK/DB/'
 
+PDBBIND_DIR = '/home/dat/WORK/DB/PDBbind/'
+
 PROTEIN_INDEXFILE = ['/home/dat/WORK/DB/PDBbind/v2014-core/INDEX_core_data.2013',
                      '/home/dat/WORK/DB/PDBbind/v2013-core/INDEX_core_data.2013',
                      '/home/dat/WORK/output/PDBbind_test12.txt',
