@@ -5,6 +5,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/constConf.py" afterPath="$PROJECT_DIR$/constConf.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/createXScoreConf.py" afterPath="$PROJECT_DIR$/createXScoreConf.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ioPDBbind.py" afterPath="$PROJECT_DIR$/ioPDBbind.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="assertment.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -64,7 +65,7 @@
       <file leaf-file-name="createGoldConf.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/createGoldConf.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.27552673">
+            <state vertical-scroll-proportion="0.110210694">
               <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
               <folding>
                 <element signature="e#69#83#0" expanded="true" />
@@ -966,7 +967,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/createGoldConf.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27552673">
+        <state vertical-scroll-proportion="0.110210694">
           <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
           <folding>
             <element signature="e#69#83#0" expanded="true" />
