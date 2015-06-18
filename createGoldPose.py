@@ -1,10 +1,11 @@
 
-import subprocess
+
 import os
+
 from constConf import *
+from libRMSD import *
 
 SOURCE_CONF     = '/home/dat/WORK/docking_config/gold_pose.conf'
-TMP_FILE        = '/home/dat/rmsd.tmp'
 GAruns = 50
 searchEff = 10
 
@@ -77,7 +78,7 @@ def createGoldPosePDBbindAllMethods(PDBbindSet):
     for dockingMethod in lSCORE:
         createGoldPosePDBbindFromSet(PDBBIND_DIR, PDBbindSet, dockingMethod, GAruns = GAruns, searchEff = searchEff)
 
-
+# check how many docking is success and print the failed
 def checkSuccessDocking(outputDir):
     count = 0
     for proteinID in os.listdir(outputDir):
@@ -85,50 +86,20 @@ def checkSuccessDocking(outputDir):
             match = [1 for x in os.listdir(os.path.join(outputDir, proteinID)) if x.find("gold_soln") > -1]
             if match != []:
                 count = count + 1
+            else:
+                print(proteinID)
     return (count)
 
-def calcRMSD(refLigand, calcLigand):
-    f = open(TMP_FILE, "w")
-    run_cmd = "rms_analysis " + refLigand + " " + calcLigand
-    subprocess.call(run_cmd.split(), stdout=f)
-
-def parseRMSDoutput(outputFile = TMP_FILE):
-    FILE  = open(outputFile, 'r')
-    for line in FILE:
-        if line.find('Distance') > -1:
-            break # found the identified line
-    line = FILE.readline() # read the next line
-    return(line.split()[0])
-
-# return a list of RMSDs for all poses in poseDir, pose files are assumed to start with prefix gold_soln
-# \TODO: change the prefix
-def calcRMSDPoses(refLigand, poseDir):
-    RMSDs = {}
-    for ligand in os.listdir(poseDir):
-        if ligand.startswith("gold_soln"):
-            rmsd = calcRMSD(refLigand, os.path.join(poseDir, ligand))
-            RMSDs[ligand] = parseRMSDoutput()
-    return (RMSDs)
-
-def writeRMSD2CSV(RMSDs, output):
-    FILE = open(output, 'w')
-    CSV = csv.writer(FILE, delimiter=',')
-    # write the csv header
-    CSV.writerow(["ID", "RMSDs"])
-
-    for ligandID in RMSDs.keys():
-        CSV.writerow(ligandID, RMSDs[ligandID])
-    FILE.close()
 
 def main():
-    PDBbindSet = "v2012-refined"
+    #PDBbindSet = "v2012-refined"
     #createGoldPosePDBbindAllMethods(PDBbindSet)
     #createGoldPose("/home/dat/WORK/DB/PDBbind/v2014-refined/3ejp/", "3ejp",
     #               "/home/dat/WORK/DB/PDBbind/v2014-refined/3ejp/", "3ejp_ligand.mol2", dockingMethod, "/home/dat/WORK/output/test/")
     #createGoldPosePDBbind(PDBBIND_DIR, PDBbindSet , "3ejp", dockingMethod)
-    calcLigand = "/home/dat/WORK/output/v2014-refined/plp/1hee/" + "gold_soln_1hee_ligand_m1_2.mol2"
-    refLigand = "/home/dat/WORK/DB/PDBbind/v2014-refined/1hee/" + "1hee_ligand.mol2"
-    calcRMSD(refLigand, calcLigand)
-    print(calcRMSDPoses(refLigand, "/home/dat/WORK/output/v2014-refined/plp/1hee/"))
-    # print(checkSuccessDocking("/home/dat/WORK/output/v2014-refined/plp/"))
+    #calcLigand = "/home/dat/WORK/output/v2014-refined/plp/1hee/" + "gold_soln_1hee_ligand_m1_2.mol2"
+    #refLigand = "/home/dat/WORK/DB/PDBbind/v2014-refined/1hee/" + "1hee_ligand.mol2"
+    #calcRMSD(refLigand, calcLigand)
+    #writeRMSD2CSV(calcRMSDPoses(refLigand, "/home/dat/WORK/output/v2014-refined/plp/1hee/"), "/home/dat/output.csv")
+    print(checkSuccessDocking("/home/dat/WORK/output/v2014-refined/goldscore/"))
 main()

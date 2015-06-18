@@ -9,7 +9,7 @@ import ioPDBbind, ioMisc
 # import constant
 from constConf import *
 
-                SOURCE_CONF     = '/home/dat/WORK/docking_config/gold.conf'
+SOURCE_CONF     = '/home/dat/WORK/docking_config/gold.conf'
 
 #################################################################
 i = 0
