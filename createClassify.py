@@ -210,7 +210,7 @@ trainingList = ["CASF12", "CASF13", "CASF14"]
 
 def convertCSV():
     batchFile = "/home/dat/WORK/dev/weka-3-6-11/convertCSV2ARFF.sh"
-    convertCSV2ARFF("/home/dat/WORK/DB/DESCRIPTORS/June-2015/", "/home/dat/arff/DIG10.2", batchFile)
+    convertCSV2ARFF("/home/dat/WORK/DB/DESCRIPTORS/June-2015/", "/home/dat/WORK/arff/", batchFile)
 
 def JMJD():
     batchFile = "/home/dat/WORK/dev/weka-3-7-12/performScoring_JMJ.sh"
@@ -252,5 +252,5 @@ def CSAR():
 if __name__=='__main__':
     '''
     '''
-    CSAR()
-    #convertCSV()
+    #CSAR()
+    convertCSV()

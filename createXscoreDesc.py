@@ -130,4 +130,4 @@ def writeXScore():
 #createConfCSAR2013()
 def main():
     pass
-#main()
+main()
