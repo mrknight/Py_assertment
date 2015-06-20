@@ -129,7 +129,10 @@ def DUDE():
 
 def RMSD():
     batchFile = "/home/dat/WORK/dev/performScoring_RMSD"
-    createTrainingModel(batchFile+"_training.sh", trainingSet="_refined_RMSD_")
+    #createTrainingModel(batchFile+"_training.sh", trainingSet="_refined_RMSD_")
+    DBSet = ["SP", "XP", "asp", "plp", "chemscore", "goldscore"]
+    for eachset in DBSet:
+        classifyTestModel(batchFile+"_test.sh", trainingSet="_refined_RMSD_", DBsetPrefix="DIG10.2_", DBsetPostfix=eachset)
 
 
 ############# MAIN PART ########################
