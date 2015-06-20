@@ -122,8 +122,8 @@ def CSAR():
      #   createClassifyScript(batchFile, eachset)
 
 def DUDE():
-    batchFile = "/home/dat/WORK/dev/weka-3-7-12/performScoring_DUDE_2"
-    DBSet = ["ADA"]#, "RENI", "FGFR1"]
+    batchFile = "/home/dat/WORK/dev/weka-3-7-12/performScoring_DUDE"
+    DBSet = ["RENI", "FGFR1"]#"ADA",
     for eachset in DBSet:
         classifyTestModel(batchFile+"_test.sh", trainingSet="_refined_", DBsetPrefix="DUD-E_", DBsetPostfix=eachset)
 
@@ -139,7 +139,7 @@ def RMSD():
 if __name__=='__main__':
     '''
     '''
-    RMSD()
+    #RMSD()
     #CSAR()
-    #DUDE()
+    DUDE()
 
