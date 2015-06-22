@@ -126,8 +126,10 @@ def writeXScore():
     #writeXScoreDesc("/home/dat/WORK/output/DUD-E/RENI", "/home/dat/WORK/DB/DESCRIPTORS/DUD-E/DUD-E_RENI_xscore.csv")
     #writeXScoreDesc("/home/dat/WORK/output/v2014-refined/xscore/", "/home/dat/WORK/DB/DESCRIPTORS/2014_xscore.csv")
     for method in dockingMethods:
-        writeXScoreDesc("/home/dat/WORK/output/cs-confgen/xscore/"+method, "/home/dat/WORK/DB/DESCRIPTORS/DIG10.2/confgen/DIG10.2_xscore_"+method+".csv")
+         writeXScoreDesc("/home/dat/WORK/output/RMSD/v2014-refined/xscore/"+method, "/home/dat/WORK/DB/DESCRIPTORS/CASF14_refined_xscore_"+method+".csv")
+#        writeXScoreDesc("/home/dat/WORK/output/cs-confgen/xscore/"+method, "/home/dat/WORK/DB/DESCRIPTORS/DIG10.2/confgen/DIG10.2_xscore_"+method+".csv")
 #createConfCSAR2013()
 def main():
+    writeXScore()
     pass
 main()

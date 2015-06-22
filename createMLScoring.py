@@ -50,8 +50,8 @@ postCmdRoF_MethodsName = ["RT", "REP"]
 descList    = ["elementsv2-SIFt_c12b0", "elementsv2-SIFt_c12b0-xscore"]
 binsizeList = [0]
 cutoff      = 12
-#trainingList = ["CASF12", "CASF13", "CASF14"]
-trainingList = ["CASF14"]
+trainingList = ["CASF12", "CASF13"]#, "CASF14"]
+#trainingList = ["CASF14"]
 
 def createTrainingModel(batchFile, trainingSet):
     SHFILE  = open(batchFile, 'a')
