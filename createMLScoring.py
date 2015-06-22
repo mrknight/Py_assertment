@@ -50,8 +50,8 @@ postCmdRoF_MethodsName = ["RT", "REP"]
 descList    = ["elementsv2-SIFt_c12b0", "elementsv2-SIFt_c12b0-xscore"]
 binsizeList = [0]
 cutoff      = 12
-trainingList = ["CASF12", "CASF13"]#, "CASF14"]
-#trainingList = ["CASF14"]
+#trainingList = ["CASF12", "CASF13"]#, "CASF14"]
+trainingList = ["CASF14"]
 
 def createTrainingModel(batchFile, trainingSet):
     SHFILE  = open(batchFile, 'a')
@@ -128,11 +128,12 @@ def DUDE():
         classifyTestModel(batchFile+"_test.sh", trainingSet="_refined_", DBsetPrefix="DUD-E_", DBsetPostfix=eachset)
 
 def RMSD():
-    batchFile = "/home/dat/WORK/dev/performScoring_RMSD"
+    batchFile = "/home/dat/WORK/RMSD/performScoring_RMSD"
     #createTrainingModel(batchFile+"_training.sh", trainingSet="_refined_RMSD_")
-    DBSet = ["SP", "XP", "asp", "plp", "chemscore", "goldscore"]
-    for eachset in DBSet:
-        classifyTestModel(batchFile+"_test.sh", trainingSet="_refined_RMSD_", DBsetPrefix="DIG10.2_", DBsetPostfix=eachset)
+    createTrainingModel(batchFile+"_training.sh", trainingSet="_reduced_RMSD_")
+    #DBSet = ["SP", "XP", "asp", "plp", "chemscore", "goldscore"]
+    #for eachset in DBSet:
+    #    classifyTestModel(batchFile+"_test.sh", trainingSet="_refined_RMSD_", DBsetPrefix="DIG10.2_", DBsetPostfix=eachset)
 
 
 ############# MAIN PART ########################
